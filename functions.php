@@ -105,3 +105,10 @@ function stickySidebar()
 }
 
 add_action('generate_after_footer_content', 'stickySidebar');
+
+// menampilkan komentar terbaru
+function wpb_reverse_comments($comments)
+{
+    return array_reverse($comments);
+}
+add_filter('comments_array', 'wpb_reverse_comments');
