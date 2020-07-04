@@ -126,7 +126,7 @@
     </style>
   </head>
 
-  <body id="root" class="<?php echo ($_GET['darkmode'] ? 'darkmode' : ''); ?>">
+  <body id="root" class="<?php echo ($_GET['dark'] ? 'darkmode' : ''); ?>">
     <div class="maincontainer">
       <link
         href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700&display=swap"
