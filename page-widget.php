@@ -15,6 +15,10 @@
         --heading-font-size: 1.6rem;
       }
 
+      html, body {
+        margin: 0px !important;
+        padding:0px !important;
+      }
       body {
         background-color: var(--background-color);
         margin: 0px;
