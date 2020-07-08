@@ -217,7 +217,8 @@
             document.getElementById("activeCare").innerText = numberWithCommas(
               data.dirawat
             );
-            let _date = new Date(data.attributes.Last_Update);
+            let _date = new Date();
+            _date.setHours(_date.getHours() - 3);
 
             document.getElementById(
               "metadataDate"
