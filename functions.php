@@ -112,3 +112,11 @@ function wpb_reverse_comments($comments)
     return array_reverse($comments);
 }
 add_filter('comments_array', 'wpb_reverse_comments');
+
+// Remove google fonts from generatePress
+add_action('wp_enqueue_scripts', function () {
+    wp_dequeue_style('generate-fonts');
+});
+add_action('admin_init', function () {
+    add_filter('generate_google_fonts_array', '__return_empty_array');
+});
