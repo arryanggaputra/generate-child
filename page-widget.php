@@ -143,21 +143,28 @@
 
       <h1>Update COVID-19 Indonesia</h1>
 
+      <?php
+$unparsed_json = file_get_contents("https://api.kawalcorona.com/indonesia/");
+
+$json_object = json_decode($unparsed_json, true);
+$data        = $json_object[0];
+?>
+
       <div class="container">
         <div class="box">
-          <span class="number cornflowerblue" id="confirmed">-</span>
+          <span class="number cornflowerblue" id="confirmed"><?php echo $data['positif']; ?></span>
           <span class="label">Terkonfirmasi</span>
         </div>
         <div class="box">
-          <span class="number orange" id="activeCare">-</span>
+          <span class="number orange" id="activeCare"><?php echo $data['dirawat']; ?></span>
           <span class="label">Dirawat</span>
         </div>
         <div class="box">
-          <span class="number green" id="recovered">-</span>
+          <span class="number green" id="recovered"><?php echo $data['sembuh']; ?></span>
           <span class="label">Sembuh</span>
         </div>
         <div class="box">
-          <span class="number red" id="deceased">-</span>
+          <span class="number red" id="deceased"><?php echo $data['meninggal']; ?></span>
           <span class="label">Meninggal</span>
         </div>
       </div>
@@ -177,60 +184,6 @@
       </div>
     </div>
 
-    <script>
-      const monthNames = [
-        "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember",
-      ];
-
-      function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
-
-      const getData = async function () {
-        let doFetch = await fetch("https://romantic-knuth-c6ede9.netlify.app/.netlify/functions/corona", {
-          method: "GET",
-        });
-
-        let result = await doFetch.json();
-
-        result.filter((data) => {
-            document.getElementById("confirmed").innerText = numberWithCommas(
-              data.positif
-            );
-            document.getElementById("recovered").innerText = numberWithCommas(
-              data.sembuh
-            );
-            document.getElementById("deceased").innerText = numberWithCommas(
-              data.meninggal
-            );
-            document.getElementById("activeCare").innerText = numberWithCommas(
-              data.dirawat
-            );
-            let _date = new Date();
-            _date.setHours(_date.getHours() - 3);
-
-            document.getElementById(
-              "metadataDate"
-            ).innerText = `${_date.getUTCDate()} ${
-              monthNames[_date.getMonth()]
-            } ${_date.getFullYear()} ${_date.getHours()}:${_date.getMinutes()}:${_date.getSeconds()}`;
-          return true;
-        });
-      };
-
-      getData();
-    </script>
 
     <!-- Google Analytics -->
 <script>
