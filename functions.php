@@ -12,6 +12,23 @@ function generatepress_child_enqueue_scripts()
 }
 add_action('wp_enqueue_scripts', 'generatepress_child_enqueue_scripts', 100);
 
+function add_preconnect_url()
+{
+    $preconnectSources = [
+        'https://googleads.g.doubleclick.net',
+        'https://www.google-analytics.com',
+        'https://www.googleadservices.com',
+        'https://www.googletagmanager.com',
+        'https://connect.facebook.net',
+    ];
+    $script = '';
+    foreach ($preconnectSources as $key => $value) {
+        $script .= '<link rel="preconnect" href="' . $value . '" crossorigin><link rel="dns-prefetch" href="' . $value . '">';
+    }
+    echo $script;
+}
+add_action('wp_head', 'add_preconnect_url');
+
 /**
  * Required and Recommended Plugins
  */
